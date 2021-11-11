@@ -22,20 +22,39 @@ describe('BookService', () => {
   });
 
   describe('getSearchResults', () => {
-    let searchResults: Book[];
+    let results: Book[];
 
     beforeEach(() => {
-      searchResults = service.getSearchResults('billy');
+      results = service.getSearchResults('billy');
     });
 
     it('should return an array of 10 books', () => {
-      expect(searchResults).toBeTruthy();
-      expect(searchResults.length).toBe(10);
+      expect(results).toBeTruthy();
+      expect(results.length).toBe(10);
     });
 
     it('each book should be titled "Search Result" + index', () => {
       for(let i: number = 0; i < 10; i++) {
-        expect(searchResults[i].title).toBe(`Search Result ${i}`);
+        expect(results[i].title).toBe(`Search Result ${i}`);
+      }
+    });
+  });
+
+  describe('getBooksToRead', () => {
+    let results: Book[];
+
+    beforeEach(() => {
+      results = service.getBooksToRead();
+    });
+
+    it('should return an array of 10 books', () => {
+      expect(results).toBeTruthy();
+      expect(results.length).toBe(3);
+    });
+
+    it('each book should be titled "To Read" + index', () => {
+      for(let i: number = 0; i < 3; i++) {
+        expect(results[i].title).toBe(`To Read ${i}`);
       }
     });
   });
