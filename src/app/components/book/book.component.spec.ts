@@ -41,5 +41,25 @@ describe('BookComponent', () => {
       const titleElement: DebugElement = fixture.debugElement.query(By.css('#title'));
       expect(titleElement.nativeElement.textContent).toBe(`Title: ${defaultBook.title}`);
     });
+
+    it('has an author', () => {
+      const titleElement: DebugElement = fixture.debugElement.query(By.css('#author'));
+      expect(titleElement.nativeElement.textContent).toBe(`Author: ${defaultBook.author}`);
+    });
+
+    it('has a type', () => {
+      const titleElement: DebugElement = fixture.debugElement.query(By.css('#type'));
+      expect(titleElement.nativeElement.textContent).toBe(`Type: ${defaultBook.type}`);
+    });
+
+    it('has a description', () => {
+      const titleElement: DebugElement = fixture.debugElement.query(By.css('#description'));
+      expect(titleElement.nativeElement.textContent).toBe(`Description: ${defaultBook.description}`);
+    });
+
+    it('has a thumbnail', () => {
+      const titleElement: DebugElement = fixture.debugElement.query(By.css('#thumbnail'));
+      expect(titleElement.attributes['src']).toBe(defaultBook.thumbnail);
+    });
   });
 });
