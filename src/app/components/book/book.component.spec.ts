@@ -10,11 +10,19 @@ describe('BookComponent', () => {
   let component: BookComponent;
   let fixture: ComponentFixture<BookComponent>;
   let service: BookService;
+  class MockBookService {
+    getFavorite(): Book {
+      return new Book();
+    }
+  }
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ BookComponent ],
-      providers: [ BookService ]
+      providers: [ {
+        provide: BookService,
+        useClass: MockBookService
+      }]
     })
     .compileComponents().then( () => {
       service = TestBed.inject(BookService);
