@@ -5,10 +5,21 @@ import { Book } from '../models/book';
   providedIn: 'root'
 })
 export class BookService {
-
+  
   constructor() { }
-
+  
   getFavorite(): Book {
     return new Book();
+  }
+
+  getSearchResults(query: string): Book[] {
+    let results: Book[] = new Array<Book>(10);
+
+    for(let i:number = 0; i < 10; i++) {
+      results[i] = new Book();
+      results[i].title = `Search Result ${i}`;
+    }
+
+    return results;
   }
 }
