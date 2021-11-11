@@ -40,24 +40,7 @@ describe('BookComponent', () => {
   });
 
   describe("component", () => {
-    let testBook: Book;
-
-    beforeEach(() => {
-      testBook = new Book();
-      testBook.title = "test";
-    });
-
-    describe('ngOnInit', () => {
-      it('gets the book from its service.getFavorite()', () => {
-        spyOn(service, 'getFavorite').and.returnValue(testBook);
-  
-        component.ngOnInit();
-        fixture.detectChanges();
-  
-        expect(service.getFavorite).toHaveBeenCalled();
-        expect(component.book).toBe(testBook);
-      });
-    });
+    
   });
 
   describe('template', () => {
