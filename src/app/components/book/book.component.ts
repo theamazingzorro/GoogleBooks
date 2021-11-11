@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Book } from 'src/app/models/book';
+import { BookService } from 'src/app/providers/book.service';
 
 @Component({
   selector: 'gb-book',
@@ -8,16 +9,16 @@ import { Book } from 'src/app/models/book';
 })
 export class BookComponent implements OnInit {
 
-  book: Book;
+  book!: Book;
 
-  constructor() { 
-    this.book = new Book();
+  constructor(public service: BookService) { 
   }
 
   ngOnInit(): void {
+    this.book = this.service.getFavorite();
   }
 
   favorite(): void {
-    
+
   }
 }

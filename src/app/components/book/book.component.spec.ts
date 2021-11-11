@@ -2,18 +2,23 @@ import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Book } from 'src/app/models/book';
+import { BookService } from 'src/app/providers/book.service';
 
 import { BookComponent } from './book.component';
 
 describe('BookComponent', () => {
   let component: BookComponent;
   let fixture: ComponentFixture<BookComponent>;
+  let service: BookService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BookComponent ]
+      declarations: [ BookComponent ],
+      providers: [ BookService ]
     })
-    .compileComponents();
+    .compileComponents().then( () => {
+      service = TestBed.inject(BookService);
+    });
   });
 
   beforeEach(() => {
@@ -27,7 +32,24 @@ describe('BookComponent', () => {
   });
 
   describe("component", () => {
+    let testBook: Book;
 
+    beforeEach(() => {
+      testBook = new Book();
+      testBook.title = "test";
+    });
+
+    describe('ngOnInit', () => {
+      it('gets the book from its service.getFavorite()', () => {
+        spyOn(service, 'getFavorite').and.returnValue(testBook);
+  
+        component.ngOnInit();
+        fixture.detectChanges();
+  
+        expect(service.getFavorite).toHaveBeenCalled();
+        expect(component.book).toBe(testBook);
+      });
+    });
   });
 
   describe('template', () => {
