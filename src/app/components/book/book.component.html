@@ -3,5 +3,6 @@
     <div id="author">Author: {{book.author}}</div>
     <div id="type">Type: {{book.type}}</div>
     <div id="description">Description: {{book.description}}</div>
-    <img id="thumbnail" src="{{book.thumbnail}}" />
+    <div id="thumbnail"><img [src]="book.thumbnail" /></div>
+    <button id="favorite-button" (click)="favorite()">Favorite</button>
 </div>

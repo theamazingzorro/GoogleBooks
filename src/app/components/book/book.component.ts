@@ -17,4 +17,7 @@ export class BookComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  favorite(): void {
+    
+  }
 }

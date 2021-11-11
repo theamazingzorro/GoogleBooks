@@ -22,7 +22,7 @@ describe('BookComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should exist', () => {
     expect(component).toBeTruthy();
   });
 
@@ -58,8 +58,26 @@ describe('BookComponent', () => {
     });
 
     it('has a thumbnail', () => {
-      const titleElement: DebugElement = fixture.debugElement.query(By.css('#thumbnail'));
+      const titleElement: DebugElement = fixture.debugElement.query(By.css('#thumbnail img'));
       expect(titleElement.attributes['src']).toBe(defaultBook.thumbnail);
+    });
+
+    describe('favorite button', () => {
+      let button: DebugElement;
+
+      beforeEach(() => {
+        button = fixture.debugElement.query(By.css('#favorite-button'));
+      });
+
+      it('exists', () => {
+        expect(button.nativeElement).toBeDefined();
+      }); 
+
+      it('calls bookcomponent.favorite() when clicked', () => {
+        spyOn(component, 'favorite');
+        button.nativeElement.click();
+        expect(component.favorite).toHaveBeenCalled();
+      });
     });
   });
 });
