@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Book } from '../models/book';
 
 @Injectable({
   providedIn: 'root'
@@ -6,4 +7,8 @@ import { Injectable } from '@angular/core';
 export class BookService {
 
   constructor() { }
+
+  getFavorite(): Book {
+    return new Book();
+  }
 }
