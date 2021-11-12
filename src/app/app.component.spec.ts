@@ -58,7 +58,7 @@ describe('AppComponent', () => {
 
   describe('component', ()=> {
     describe('ngOnInit', () => {
-    it('gets the book from its service.getFavorite()', () => {
+     it('gets the book from its service.getFavorite()', () => {
         spyOn(service, 'getFavorite').and.returnValue(testBook);
   
         component.ngOnInit();
