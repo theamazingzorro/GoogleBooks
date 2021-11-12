@@ -83,6 +83,11 @@ describe('HomeComponent', () => {
   });
 
   describe('template', ()=> {
+    it('has an addBook link', () => {
+      const titleElement: DebugElement = fixture.debugElement.query(By.css('.addNewBook'));
+      expect(titleElement.nativeElement.textContent).toBe("Add Book");
+    });
+
     it('calls bookFavorited when the book component emits an addFavoriteEvent', () => {
       spyOn(component, 'bookFavorited').and.callThrough();
   
