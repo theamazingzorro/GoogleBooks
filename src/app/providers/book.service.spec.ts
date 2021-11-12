@@ -5,10 +5,14 @@ import { BookService } from './book.service';
 
 describe('BookService', () => {
   let service: BookService;
+  let testBook: Book;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
     service = TestBed.inject(BookService);
+
+    testBook = new Book();
+    testBook.title = 'test';
   });
 
   it('should be created', () => {
@@ -16,8 +20,18 @@ describe('BookService', () => {
   });
 
   describe('getFavorite', () => {
-    it('returns a defined book', () => {
-      expect(service.getFavorite()).toBeDefined();
+    it('returns the favorite book', () => {
+      service.favoriteBook = testBook;
+
+      expect(service.getFavorite()).toBe(testBook);
+    });
+  });
+
+  describe('setFavorite', () => {
+    it('sets the favorite book field', () => {
+      service.setFavorite(testBook);
+
+      expect(service.favoriteBook).toBe(testBook);
     });
   });
 
@@ -58,4 +72,5 @@ describe('BookService', () => {
       }
     });
   });
+  
 });

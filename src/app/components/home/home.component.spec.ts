@@ -21,6 +21,10 @@ describe('HomeComponent', () => {
       return new Book();
     }
 
+    setFavorite(book: Book): void {
+      //
+    }
+
     getBooksToRead(): Book[] {
       return [];
     }
@@ -61,16 +65,6 @@ describe('HomeComponent', () => {
 
   describe('component', ()=> {
     describe('ngOnInit', () => {
-      it('gets the favorite book from its service.getFavorite()', () => {
-        spyOn(service, 'getFavorite').and.returnValue(testBook);
-  
-        component.ngOnInit();
-        fixture.detectChanges();
-  
-        expect(service.getFavorite).toHaveBeenCalled();
-        expect(component.favoriteBook).toBe(testBook);
-      });
-
       it('gets booksToRead from the bookservice', () => {
         spyOn(service, 'getBooksToRead').and.returnValue(testBooksToRead);
 
@@ -84,9 +78,9 @@ describe('HomeComponent', () => {
 
     describe('bookFavorited', () => {
       it('sets the favoriteBook property from the set value', () => {
-        component.favoriteBook = new Book();
+        spyOn(service, 'setFavorite');
         component.bookFavorited(testBook);
-        expect(component.favoriteBook).toBe(testBook);
+        expect(service.setFavorite).toHaveBeenCalledWith(testBook);
       });
     });
   });

@@ -9,7 +9,6 @@ import { BookService } from 'src/app/providers/book.service';
 })
 export class HomeComponent implements OnInit {
 
-  favoriteBook!: Book;
   booksToRead: Book[] = []; 
 
   constructor(public service: BookService) {
@@ -17,12 +16,11 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.favoriteBook = this.service.getFavorite();
     this.booksToRead = this.service.getBooksToRead();
   }
 
   bookFavorited(book: Book): void {
-    this.favoriteBook = book;
+    this.service.setFavorite(book);
   }
 
 }

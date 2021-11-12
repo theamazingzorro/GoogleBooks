@@ -6,12 +6,18 @@ import { Book } from '../models/book';
 })
 export class BookService {
   
+  favoriteBook: Book = new Book();
+
   constructor() { }
   
   getFavorite(): Book {
-    return new Book();
+    return this.favoriteBook;
   }
   
+  setFavorite(book: Book): void {
+    this.favoriteBook = book;
+  }
+
   getSearchResults(query: string): Book[] {
     let results: Book[] = new Array<Book>(10);
     
