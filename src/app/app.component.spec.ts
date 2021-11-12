@@ -11,10 +11,15 @@ describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
   let testBook: Book;
+  let testBooksToRead: Book[];
   let service: BookService;
   class MockBookService {
     getFavorite(): Book {
       return new Book();
+    }
+
+    getBooksToRead(): Book[] {
+      return [];
     }
   }
 
@@ -44,6 +49,8 @@ describe('AppComponent', () => {
 
     testBook = new Book();
     testBook.title = "test";
+
+    testBooksToRead = [new Book(), new Book(), new Book];
   });
 
   it('should create the app', () => {
@@ -58,7 +65,7 @@ describe('AppComponent', () => {
 
   describe('component', ()=> {
     describe('ngOnInit', () => {
-     it('gets the book from its service.getFavorite()', () => {
+      it('gets the book from its service.getFavorite()', () => {
         spyOn(service, 'getFavorite').and.returnValue(testBook);
   
         component.ngOnInit();
@@ -66,6 +73,16 @@ describe('AppComponent', () => {
   
         expect(service.getFavorite).toHaveBeenCalled();
         expect(component.favoriteBook).toBe(testBook);
+      });
+
+      it('gets booksToRead from the bookservice', () => {
+        spyOn(service, 'getBooksToRead').and.returnValue(testBooksToRead);
+
+        component.ngOnInit();
+        fixture.detectChanges();
+
+        expect(service.getBooksToRead).toHaveBeenCalled();
+        expect(component.booksToRead).toBe(testBooksToRead);
       });
     });
 
@@ -87,8 +104,18 @@ describe('AppComponent', () => {
       button.nativeElement.dispatchEvent(event);
   
       expect(component.bookFavorited).toHaveBeenCalled();
-      
     });
+
+    describe('booksToRead section', () => {
+      it('renders a book object for each book in booksToRead', () => {
+        component.booksToRead = testBooksToRead;
+        fixture.detectChanges();
+
+        const booksToReadView = fixture.debugElement.queryAll(By.css(".booksToRead gb-book"));
+        expect(booksToReadView.length).toBe(testBooksToRead.length);
+      });
+    });
+
 
   });
 
