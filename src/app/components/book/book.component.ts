@@ -10,6 +10,7 @@ export class BookComponent implements OnInit {
 
   @Input()
   book: Book = new Book();
+  isFavorite: boolean = false;
 
   @Output()
   addToFavoriteEvent: EventEmitter<Book> = new EventEmitter<Book>();
@@ -20,7 +21,7 @@ export class BookComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  favorite(): void {
+  makeFavorite(): void {
     this.addToFavoriteEvent.emit(this.book);
   }
 }

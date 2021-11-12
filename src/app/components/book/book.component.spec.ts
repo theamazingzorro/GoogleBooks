@@ -42,7 +42,7 @@ describe('BookComponent', () => {
   describe("component", () => {
     it('emits an event when favorite method is called', () => {
       spyOn(component.addToFavoriteEvent, 'emit');
-      component.favorite();
+      component.makeFavorite();
       expect(component.addToFavoriteEvent.emit).toHaveBeenCalledWith(component.book)
     });
   });
@@ -80,20 +80,29 @@ describe('BookComponent', () => {
     });
 
     describe('favorite button', () => {
-      let button: DebugElement;
+      it('exists if book is not favorite', () => {
+        component.isFavorite = false;
+        fixture.detectChanges();
 
-      beforeEach(() => {
-        button = fixture.debugElement.query(By.css('#favorite-button'));
-      });
-
-      it('exists', () => {
+        let button: DebugElement = fixture.debugElement.query(By.css('#favorite-button'));
         expect(button.nativeElement).toBeDefined();
       }); 
 
+      it('is hidden if book is favorite', () => {
+        component.isFavorite = true;
+        fixture.detectChanges();
+
+        let button: DebugElement = fixture.debugElement.query(By.css('#favorite-button'));
+        expect(button).toBeNull();
+      }); 
+
       it('calls bookcomponent.favorite() when clicked', () => {
-        spyOn(component, 'favorite');
+        spyOn(component, 'makeFavorite');
+
+        let button: DebugElement = fixture.debugElement.query(By.css('#favorite-button'));
         button.nativeElement.click();
-        expect(component.favorite).toHaveBeenCalled();
+
+        expect(component.makeFavorite).toHaveBeenCalled();
       });
     });
   });

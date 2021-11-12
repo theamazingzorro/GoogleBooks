@@ -4,5 +4,5 @@
     <div id="type">Type: {{book.type}}</div>
     <div id="description">Description: {{book.description}}</div>
     <div id="thumbnail"><img [src]="book.thumbnail" /></div>
-    <button id="favorite-button" (click)="favorite()">Favorite</button>
+    <button *ngIf="!isFavorite" id="favorite-button" (click)="makeFavorite()">Favorite</button>
 </div>
