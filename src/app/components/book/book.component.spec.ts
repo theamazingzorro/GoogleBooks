@@ -40,7 +40,11 @@ describe('BookComponent', () => {
   });
 
   describe("component", () => {
-    
+    it('emits an event when favorite method is called', () => {
+      spyOn(component.addToFavoriteEvent, 'emit');
+      component.favorite();
+      expect(component.addToFavoriteEvent.emit).toHaveBeenCalledWith(component.book)
+    });
   });
 
   describe('template', () => {

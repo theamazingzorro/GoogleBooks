@@ -18,4 +18,8 @@ export class AppComponent implements OnInit{
   ngOnInit(): void {
     this.favoriteBook = this.service.getFavorite();
   }
+
+  bookFavorited(book: Book): void {
+    alert('Book favorited')
+  }
 }

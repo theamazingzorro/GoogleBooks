@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Book } from 'src/app/models/book';
 
 @Component({
@@ -11,6 +11,9 @@ export class BookComponent implements OnInit {
   @Input()
   book: Book = new Book();
 
+  @Output()
+  addToFavoriteEvent: EventEmitter<Book> = new EventEmitter<Book>();
+
   constructor() { 
   }
 
@@ -18,6 +21,6 @@ export class BookComponent implements OnInit {
   }
 
   favorite(): void {
-
+    this.addToFavoriteEvent.emit(this.book);
   }
 }
