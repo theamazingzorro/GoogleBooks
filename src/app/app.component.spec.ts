@@ -1,4 +1,6 @@
+import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { BookComponent } from './components/book/book.component';
@@ -54,16 +56,40 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('GoogleBooks');
   });
 
+  describe('component', ()=> {
+    describe('ngOnInit', () => {
+     it('gets the book from its service.getFavorite()', () => {
+        spyOn(service, 'getFavorite').and.returnValue(testBook);
+  
+        component.ngOnInit();
+        fixture.detectChanges();
+  
+        expect(service.getFavorite).toHaveBeenCalled();
+        expect(component.favoriteBook).toBe(testBook);
+      });
+    });
 
-  describe('ngOnInit', () => {
-   it('gets the book from its service.getFavorite()', () => {
-      spyOn(service, 'getFavorite').and.returnValue(testBook);
-
-      component.ngOnInit();
-      fixture.detectChanges();
-
-      expect(service.getFavorite).toHaveBeenCalled();
-      expect(component.favoriteBook).toBe(testBook);
+    describe('bookFavorited', () => {
+      it('sets the favoriteBook property from the set value', () => {
+        component.favoriteBook = new Book();
+        component.bookFavorited(testBook);
+        expect(component.favoriteBook).toBe(testBook);
+      });
     });
   });
+
+  describe('template', ()=> {
+    it('calls bookFavorited when the book component emits an addFavoriteEvent', () => {
+      spyOn(component, 'bookFavorited').and.callThrough();
+  
+      const button: DebugElement = fixture.debugElement.query(By.css('gb-book'));
+      const event: Event = new Event('addToFavoriteEvent');
+      button.nativeElement.dispatchEvent(event);
+  
+      expect(component.bookFavorited).toHaveBeenCalled();
+      
+    });
+
+  });
+
 });
