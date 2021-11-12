@@ -1,8 +1,11 @@
 import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { RouterTestingModule } from '@angular/router/testing';
 import { Book } from 'src/app/models/book';
 import { BookService } from 'src/app/providers/book.service';
+import { BookComponent } from '../book/book.component';
+import { SearchComponent } from '../search/search.component';
 
 import { HomeComponent } from './home.component';
 
@@ -24,7 +27,12 @@ describe('HomeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HomeComponent ],
+      imports: [ RouterTestingModule ],
+      declarations: [ 
+        HomeComponent,
+        BookComponent,
+        SearchComponent
+      ],
       providers: [ {
         provide: BookService,
         useClass: MockBookService
