@@ -10,6 +10,7 @@ export class BookComponent implements OnInit {
 
   @Input()
   book: Book = new Book();
+  @Input()
   isFavorite: boolean = false;
 
   @Output()
@@ -22,6 +23,7 @@ export class BookComponent implements OnInit {
   }
 
   makeFavorite(): void {
+    this.isFavorite = true;
     this.addToFavoriteEvent.emit(this.book);
   }
 }
