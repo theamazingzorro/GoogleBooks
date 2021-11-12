@@ -1,0 +1,11 @@
+<gb-book class="favoriteBook" [book]="favoriteBook" [isFavorite]="true" 
+    (addToFavoriteEvent)="bookFavorited($event)" ></gb-book>
+<div class="booksToRead">
+    <h2>Books to Read</h2>
+    <div *ngFor="let book of booksToRead">
+        <br />
+        <gb-book [book]="book" [isFavorite]="false" 
+            (addToFavoriteEvent)="bookFavorited($event)"></gb-book>
+        
+    </div>
+</div>
