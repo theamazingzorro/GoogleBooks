@@ -1,8 +1,8 @@
 <div>
-    <div id="title">Title: {{book.title}}</div>
-    <div id="author">Author: {{book.author}}</div>
-    <div id="type">Type: {{book.type}}</div>
-    <div id="description">Description: {{book.description}}</div>
-    <div id="thumbnail"><img [src]="book.thumbnail" /></div>
-    <button *ngIf="!isFavorite" id="favorite-button" (click)="makeFavorite()">Favorite</button>
+    <div class="title">Title: {{book.title}}</div>
+    <div class="author">Author: {{book.author}}</div>
+    <div class="type">Type: {{book.type}}</div>
+    <div class="description">Description: {{book.description}}</div>
+    <div class="thumbnail"><img [src]="book.thumbnail" /></div>
+    <button *ngIf="!isFavorite" class="favorite-button" (click)="makeFavorite()">Favorite</button>
 </div>
