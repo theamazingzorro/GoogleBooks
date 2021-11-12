@@ -20,6 +20,6 @@ export class AppComponent implements OnInit{
   }
 
   bookFavorited(book: Book): void {
-    alert('Book favorited')
+    this.favoriteBook = book;
   }
 }
