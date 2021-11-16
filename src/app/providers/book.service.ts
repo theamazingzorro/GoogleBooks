@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { map, mergeMap, Observable } from 'rxjs';
 import { Book } from '../models/book';
 
 @Injectable({
@@ -8,7 +10,7 @@ export class BookService {
   
   favoriteBook: Book = new Book();
 
-  constructor() { }
+  constructor(public httpClient: HttpClient) { }
   
   getFavorite(): Book {
     return this.favoriteBook;
@@ -18,15 +20,24 @@ export class BookService {
     this.favoriteBook = book;
   }
 
-  getSearchResults(query: string): Book[] {
-    let results: Book[] = new Array<Book>(10);
-    
-    for(let i:number = 0; i < 10; i++) {
-      results[i] = new Book();
-      results[i].title = `Search Result ${i}`;
-    }
-    
-    return results;
+  getSearchResults(query: string): Observable<Book> {
+    let url= 'https://www.googleapis.com/books/v1/volumes?q=' + query;
+    return this.httpClient.get(url)
+      .pipe(mergeMap((value: any) => {
+        return value.items;
+      }))
+      .pipe(map((value: any) => {
+        return value.volumeInfo;
+      }))
+      .pipe(map((value: any) => {
+        let book = new Book();
+        book.title= value.title;
+        book.description= value.description;
+        book.author= value.authors.join(', ');
+        book.type= value.printType;
+        book.thumbnail= value.imageLinks.thumbnail;
+        return book;
+      }));
   }
 
   getBooksToRead(): Book[] {
